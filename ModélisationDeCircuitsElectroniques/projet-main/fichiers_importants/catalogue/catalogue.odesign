@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="catalogue" version="12.0.0.2017041100">
+  <ownedViewpoints name="catalogueViewpoint" modelFileExtension="catalogue">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="catalogue" domainClass="catalogue::Catalogue" enablePopupBars="true">
+      <metamodel href="http://www.example.org/catalogue#/"/>
+      <defaultLayer name="Default">
+        <edgeMappings name="PositionPortEdge" sourceMapping="//@ownedViewpoints[name='catalogueViewpoint']/@ownedRepresentations[name='catalogue']/@defaultLayer/@containerMappings[name='ComposantContainer']/@subNodeMappings[name='PositionPortNode']" targetMapping="//@ownedViewpoints[name='catalogueViewpoint']/@ownedRepresentations[name='catalogue']/@defaultLayer/@containerMappings[name='ComposantContainer']/@subNodeMappings[name='PortNode']" targetFinderExpression="feature:port">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="ComposantContainer" semanticCandidatesExpression="feature:composants" domainClass="catalogue::Composant">
+          <subNodeMappings name="PortNode" semanticCandidatesExpression="feature:ports" domainClass="catalogue::Port">
+            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'Port ' + self.nom + ' ( ' + self.type + ')'" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="EmpreinteNode" semanticCandidatesExpression="feature:empreinte" domainClass="catalogue::Empreinte">
+            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:'Empreinte :' + self.largeur + ' x ' + self.hauteur" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="ContrainteGeoNode" semanticCandidatesExpression="aql:self.contraintes->filter(catalogue::ContrainteGeometrique)" domainClass="catalogue::ContrainteGeometrique">
+            <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="aql: 'Contraintes geo : ' + self.zoneLibre + 'mm'" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="ContrainteRedondNode" semanticCandidatesExpression="aql:self.contraintes->filter(catalogue::ContrainteRedondance)" domainClass="catalogue::ContrainteRedondance">
+            <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="aql:'x' + self.nombre" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="ContrainteBoardNode" semanticCandidatesExpression="aql:self.contraintes->filter(catalogue::ContrainteBoard)" domainClass="catalogue::ContrainteBoard">
+            <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="feature:expression" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="ContrainteAttrNode" semanticCandidatesExpression="aql:self.contraintes->filter(catalogue::ContrainteAttribut)" domainClass="catalogue::ContrainteAttribut">
+            <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="aql:self.nomAttribut + '=' + self.valeurAttendue" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="PositionPortNode" semanticCandidatesExpression="aql:self.empreinte.positionsPort" domainClass="catalogue::PositionPort">
+            <style xsi:type="style:DotDescription" labelSize="12" showIcon="false" labelExpression="aql: '(' + self.x + ', ' + self.y + ')'" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            </style>
+          </subNodeMappings>
+          <subContainerMappings name="ContrainteCompositeContainer" semanticCandidatesExpression="aql:self.contraintes->filter(catalogue::ContrainteComposite)" domainClass="catalogue::ContrainteComposite">
+            <subNodeMappings name="SousContrainteNode" semanticCandidatesExpression="feature:sousContraintes" domainClass="catalogue::Contrainte">
+              <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="feature:description" labelPosition="node" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql:'[' + self.operateur + ']'">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql:self.nom">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+          <conditionnalStyles predicateExpression="aql:self.nom.contains('resistance')">
+            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="aql:self.nom + ' (' + self.fabricant + ')' + '\n───────────────────' + '\nEmpreinte: ' + if self.empreinte &lt;> null then self.empreinte.largeur + ' x ' + self.empreinte.hauteur + ' mm' else 'N/A' endif + '\nPorts: ' + self.ports->collect(p | p.nom )->sep(', ') + '\nContraintes: ' + self.contraintes->size() + ' définies' " labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/resistance.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.nom.contains('generateur')">
+            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="aql:self.nom + ' (' + self.fabricant + ')' + '\n───────────────────' + '\nEmpreinte: ' + if self.empreinte &lt;> null then self.empreinte.largeur + ' x ' + self.empreinte.hauteur + ' mm' else 'N/A' endif + '\nPorts: ' + self.ports->collect(p | p.nom)->sep(', ') + '\nContraintes: ' + self.contraintes->size() + ' définies' " labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/generateur.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.nom.contains('diode')">
+            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="aql:self.nom + ' (' + self.fabricant + ')' + '\n───────────────────' + '\nEmpreinte: ' + if self.empreinte &lt;> null then self.empreinte.largeur + ' x ' + self.empreinte.hauteur + ' mm' else 'N/A' endif + '\nPorts: ' + self.ports->collect(p | p.nom)->sep(', ') + '\nContraintes: ' + self.contraintes->size() + ' définies' " labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/diode.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.nom.contains('bobine')">
+            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="aql:self.nom + ' (' + self.fabricant + ')' + '\n───────────────────' + '\nEmpreinte: ' + if self.empreinte &lt;> null then self.empreinte.largeur + ' x ' + self.empreinte.hauteur + ' mm' else 'N/A' endif + '\nPorts: ' + self.ports->collect(p | p.nom)->sep(', ') + '\nContraintes: ' + self.contraintes->size() + ' définies' " labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/bobine.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.nom.contains('condensateur')">
+            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="aql:self.nom + ' (' + self.fabricant + ')' + '\n───────────────────' + '\nEmpreinte: ' + if self.empreinte &lt;> null then self.empreinte.largeur + ' x ' + self.empreinte.hauteur + ' mm' else 'N/A' endif + '\nPorts: ' + self.ports->collect(p | p.nom)->sep(', ') + '\nContraintes: ' + self.contraintes->size() + ' définies' " labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/condensateur.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionalStyles predicateExpression="aql:self.nom.contains('resistance')">
+						<style xsi:type="style:WorkspaceImageDescription" labelSize="12" labelExpression="aql:self.nom + ' (' + self.fabricant + ') '" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/resistance.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+					</conditionalStyles>
+          <conditionalStyles predicateExpression="aql:self.nom.contains('condensateur')">
+						<style xsi:type="style:WorkspaceImageDescription" labelSize="12" labelExpression="aql:self.nom + ' (' + self.fabricant + ') '" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/condensateur.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+					</conditionalStyles>
+          <conditionalStyles predicateExpression="aql:self.nom.contains('bobine')">
+						<style xsi:type="style:WorkspaceImageDescription" labelSize="12" labelExpression="aql:self.nom + ' (' + self.fabricant + ') '" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/bobine.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+					</conditionalStyles>
+          <conditionalStyles predicateExpression="aql:self.nom.contains('diode')">
+						<style xsi:type="style:WorkspaceImageDescription" labelSize="12" labelExpression="aql:self.nom + ' (' + self.fabricant + ') '" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/diode.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+					</conditionalStyles>
+          <conditionalStyles predicateExpression="aql:self.nom.contains('generateur')">
+						<style xsi:type="style:WorkspaceImageDescription" labelSize="12" labelExpression="aql:self.nom + ' (' + self.fabricant + ') '" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.catalogue.design/description/icons/generateur.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+					</conditionalStyles>
+        </containerMappings>
+        <toolSections name="ComposanteSection">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateResistance" containerMappings="//@ownedViewpoints[name='catalogueViewpoint']/@ownedRepresentations[name='catalogue']/@defaultLayer/@containerMappings[name='ComposantContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue.Composant" referenceName="composants">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'resistance'"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="fabricant" valueExpression="aql:'Fabricant'"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Empreinte" referenceName="empreinte" variableName="newEmpreinte">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="largeur" valueExpression="aql:10.0"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="hauteur" valueExpression="aql:5.0"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port1">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'IN'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::ENTREE"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port2">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'OUT'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::SORTIE"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateCondensateur" containerMappings="//@ownedViewpoints[name='catalogueViewpoint']/@ownedRepresentations[name='catalogue']/@defaultLayer/@containerMappings[name='ComposantContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue.Composant" referenceName="composants">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'condensateur'"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="fabricant" valueExpression="aql:'Fabricant'"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Empreinte" referenceName="empreinte" variableName="newEmpreinte">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="largeur" valueExpression="aql:10.0"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="hauteur" valueExpression="aql:5.0"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port1">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'IN'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::ENTREE"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port2">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'OUT'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::SORTIE"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateDiode" containerMappings="//@ownedViewpoints[name='catalogueViewpoint']/@ownedRepresentations[name='catalogue']/@defaultLayer/@containerMappings[name='ComposantContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue.Composant" referenceName="composants">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'diode'"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="fabricant" valueExpression="aql:'Fabricant'"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Empreinte" referenceName="empreinte" variableName="newEmpreinte">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="largeur" valueExpression="aql:10.0"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="hauteur" valueExpression="aql:5.0"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port1">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'IN'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::ENTREE"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port2">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'OUT'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::SORTIE"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateGenerateur" containerMappings="//@ownedViewpoints[name='catalogueViewpoint']/@ownedRepresentations[name='catalogue']/@defaultLayer/@containerMappings[name='ComposantContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue.Composant" referenceName="composants">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'generateur'"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="fabricant" valueExpression="aql:'Fabricant'"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Empreinte" referenceName="empreinte" variableName="newEmpreinte">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="largeur" valueExpression="aql:10.0"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="hauteur" valueExpression="aql:5.0"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port1">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'IN'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::ENTREE"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port2">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'OUT'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::SORTIE"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateBobine" containerMappings="//@ownedViewpoints[name='catalogueViewpoint']/@ownedRepresentations[name='catalogue']/@defaultLayer/@containerMappings[name='ComposantContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue.Composant" referenceName="composants">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'bobine'"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="fabricant" valueExpression="aql:'Fabricant'"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Empreinte" referenceName="empreinte" variableName="newEmpreinte">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="largeur" valueExpression="aql:10.0"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="hauteur" valueExpression="aql:5.0"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port1">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'IN'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::ENTREE"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="catalogue::Port" referenceName="ports" variableName="port2">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="nom" valueExpression="aql:'OUT'"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="aql:catalogue::TypePort::SORTIE"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="fr.n7.circuits.catalogue.design.Services"/>
+  </ownedViewpoints>
+</description:Group>

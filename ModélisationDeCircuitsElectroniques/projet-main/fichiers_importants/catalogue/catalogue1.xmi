@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cat:Catalogue xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:cat="http://www.example.org/catalogue">
+  <composants xmi:id="C_RES" nom="Resistance" fabricant="Generique">
+    <empreinte largeur="6.0" hauteur="2.0">
+      <positionsPort port="P_RES_A" y="1.0"/>
+      <positionsPort port="P_RES_B" x="6.0" y="1.0"/>
+    </empreinte>
+    <ports xmi:id="P_RES_A" nom="A_R" type="BIDIRECTIONNEL"/>
+    <ports xmi:id="P_RES_B" nom="B_R" type="BIDIRECTIONNEL"/>
+  </composants>
+  <composants xmi:id="C_BOB" nom="Bobine" fabricant="Generique">
+    <empreinte largeur="7.0" hauteur="2.0">
+      <positionsPort port="P_BOB_A" y="1.0"/>
+      <positionsPort port="P_BOB_B" x="7.0" y="1.0"/>
+    </empreinte>
+    <ports xmi:id="P_BOB_A" nom="A_B" type="BIDIRECTIONNEL"/>
+    <ports xmi:id="P_BOB_B" nom="B_B" type="BIDIRECTIONNEL"/>
+  </composants>
+  <composants xmi:id="C_COND" nom="Condensateur" fabricant="Generique">
+    <empreinte largeur="5.0" hauteur="3.0">
+      <positionsPort port="P_COND_A" y="1.5"/>
+      <positionsPort port="P_COND_B" x="5.0" y="1.5"/>
+    </empreinte>
+    <ports xmi:id="P_COND_A" nom="A_C" type="BIDIRECTIONNEL"/>
+    <ports xmi:id="P_COND_B" nom="B_C" type="BIDIRECTIONNEL"/>
+  </composants>
+  <composants xmi:id="C_GEN" nom="Generateur" fabricant="Generique">
+    <empreinte largeur="8.0" hauteur="3.0">
+      <positionsPort port="P_GEN_PLUS" y="1.5"/>
+      <positionsPort port="P_GEN_MOINS" x="8.0" y="1.5"/>
+    </empreinte>
+    <ports xmi:id="P_GEN_PLUS" nom="PLUS" type="ALIMENTATION"/>
+    <ports xmi:id="P_GEN_MOINS" nom="MOINS" type="MASSE"/>
+  </composants>
+</cat:Catalogue>

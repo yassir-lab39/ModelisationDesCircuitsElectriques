@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="netlist" version="12.0.0.2017041100">
+  <ownedViewpoints name="netlistViewpoint" modelFileExtension="netlist">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="netlist" titleExpression="aql:'Netlist: ' + self.nom" domainClass="netlist::Netlist" enablePopupBars="true">
+      <metamodel href="http://www.example.org/netlist#/"/>
+      <metamodel href="http://www.example.org/catalogue#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="CommentaireNode" semanticCandidatesExpression="feature:commentaires" domainClass="netlist::Commentaire">
+          <style xsi:type="style:NoteDescription" labelSize="12" showIcon="false" labelExpression="aql:self.texte + '\n--' + self.auteur" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='yellow']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="ConnexionEdge" semanticCandidatesExpression="feature:connexions" sourceMapping="//@ownedViewpoints[name='netlistViewpoint']/@ownedRepresentations[name='netlist']/@defaultLayer/@containerMappings[name='InstanceComposantContainer']" targetMapping="//@ownedViewpoints[name='netlistViewpoint']/@ownedRepresentations[name='netlist']/@defaultLayer/@containerMappings[name='InstanceComposantContainer']" targetFinderExpression="aql:self.portsConnectes->at(2).instance" sourceFinderExpression="aql:self.portsConnectes->first().instance" domainClass="netlist::Connexion" useDomainElement="true">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="InstanceComposantContainer" semanticCandidatesExpression="feature:instances" domainClass="netlist::InstanceComposant">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="feature:id">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+          <conditionnalStyles predicateExpression="aql:self.composantRef.nom.toLower().contains('resistance')">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:self.id +  ' = ' + self.valeur" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.netlist.design/description/icons/resistance.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.composantRef.nom.toLower().contains('diode')">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:self.id +  ' = ' + self.valeur" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.netlist.design/description/icons/diode.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.composantRef.nom.toLower().contains('bobine')">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:self.id +  '= ' + self.valeur" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.netlist.design/description/icons/bobine.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.composantRef.nom.toLower().contains('generateur')">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:self.id +  ' = ' + self.valeur" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.netlist.design/description/icons/generateur.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+          <conditionnalStyles predicateExpression="aql:self.composantRef.nom.toLower().contains('condensateur')">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" labelExpression="aql:self.id +  ' = ' + self.valeur" labelAlignment="LEFT" workspacePath="/fr.n7.circuits.netlist.design/description/icons/condensateur.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </conditionnalStyles>
+        </containerMappings>
+        <toolSections name="InstancesSection">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateInstanceComposante" containerMappings="//@ownedViewpoints[name='netlistViewpoint']/@ownedRepresentations[name='netlist']/@defaultLayer/@containerMappings[name='InstanceComposantContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="netlist::InstanceComposant" referenceName="instances" variableName="newInstance">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="aql: 'X'"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="valeur" valueExpression="aql:'None'"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="ConnexionsSection" label="Connexions">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="CreateConnexion" label="Nouvelle Connexion" edgeMappings="//@ownedViewpoints[name='netlistViewpoint']/@ownedRepresentations[name='netlist']/@defaultLayer/@edgeMappings[name='ConnexionEdge']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source.eContainer()/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="netlist::Connexion" referenceName="connexions" variableName="newConnexion">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="nom"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="netlist::ReferencePort" referenceName="portsConnectes" variableName="ReferencePort 1">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="instance" valueExpression="aql:source"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="port" valueExpression="aql:source.composantRef.ports->first()"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="netlist::ReferencePort" referenceName="portsConnectes" variableName="ReferencePort 2">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="instance" valueExpression="aql:target"/>
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="port" valueExpression="aql:target.composantRef.ports->first()"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="CommentairesSection" label="Commentaires">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateCommentaire" label="Nouveau Commentaire" nodeMappings="//@ownedViewpoints[name='netlistViewpoint']/@ownedRepresentations[name='netlist']/@defaultLayer/@nodeMappings[name='CommentaireNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="netlist::Commentaire" referenceName="commentaires" variableName="">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="texte" valueExpression="aql:'Commentaire'"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="auteur" valueExpression="aql:'Auteur'"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="fr.n7.circuits.netlist.design.Services"/>
+  </ownedViewpoints>
+</description:Group>

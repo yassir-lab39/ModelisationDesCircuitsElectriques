@@ -1,0 +1,57 @@
+[comment encoding = UTF-8 /]
+[module netlistBOM('http://www.example.org/netlist', 'http://www.example.org/catalogue')]
+
+
+[template public netlistBOMToDot(n : Netlist)]
+[comment @main/]
+[file (n.nom.concat('_BOM.dot'), false, 'UTF-8')]
+digraph [n.nom.replaceAll(' ', '_')/]_BOM {
+    rankdir=TB;
+    node ['['/]shape=plaintext[']'/];
+    
+    // BOM Table
+    BOM ['['/]label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR>
+                <TD BGCOLOR="darkblue"><FONT COLOR="white"><B>ID</B></FONT></TD>
+                <TD BGCOLOR="darkblue"><FONT COLOR="white"><B>Composant</B></FONT></TD>
+                <TD BGCOLOR="darkblue"><FONT COLOR="white"><B>Valeur</B></FONT></TD>
+                <TD BGCOLOR="darkblue"><FONT COLOR="white"><B>Fabricant</B></FONT></TD>
+                <TD BGCOLOR="darkblue"><FONT COLOR="white"><B>Remarque</B></FONT></TD>
+            </TR>
+[for (inst : InstanceComposant | n.instances)]
+            <TR>
+                <TD>[inst.id/]</TD>
+                <TD>[inst.composantRef.nom/]</TD>
+                <TD>[if (inst.valeur <> null and inst.valeur <> '')][inst.valeur/][else]N/A[/if]</TD>
+                <TD>[if (inst.composantRef.fabricant <> null and inst.composantRef.fabricant <> '')][inst.composantRef.fabricant/][else]N/A[/if]</TD>
+                <TD>[if (inst.remarque <> null and inst.remarque <> '')][inst.remarque/][else]-[/if]</TD>
+            </TR>
+[/for]
+        </TABLE>
+    >[']'/];
+
+    Summary ['['/]label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR>
+                <TD BGCOLOR="lightgray" COLSPAN="2"><B>Statistiques BOM</B></TD>
+            </TR>
+            <TR>
+                <TD><B>Nombre total de composants:</B></TD>
+                <TD>[n.instances->size()/]</TD>
+            </TR>
+            <TR>
+                <TD><B>Types de composants uniques:</B></TD>
+                <TD>[n.instances.composantRef->asSet()->size()/]</TD>
+            </TR>
+            <TR>
+                <TD><B>Nombre de connexions:</B></TD>
+                <TD>[n.connexions->size()/]</TD>
+            </TR>
+        </TABLE>
+    >[']'/];
+    
+    BOM -> Summary ['['/]style=invis[']'/];
+}
+[/file]
+[/template]

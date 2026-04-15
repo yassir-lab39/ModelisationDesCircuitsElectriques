@@ -1,0 +1,39 @@
+[comment encoding = UTF-8 /]
+[module todot('http://www.example.org/catalogue')]
+
+[template public catalogueToDot(c : Catalogue)]
+[comment @main/]
+[file ('catalogue.dot', false, 'UTF-8')]
+digraph Catalogue {
+    rankdir=TB;
+    
+    // Style pour les composants
+    node ['['/]shape=box, style=filled, fillcolor=lightgreen[']'/];
+    
+    // Composants
+[for (comp : Composant | c.composants)]
+    [comp.nom.replaceAll(' ', '_')/] ['['/]label="[comp.nom/]\n[comp.fabricant/]\n[if (comp.empreinte <> null)][comp.empreinte.largeur/]x[comp.empreinte.hauteur/]mm[/if]"[']'/];
+[/for]
+
+    // Legende des ports
+    node ['['/]shape=ellipse, style=filled, fillcolor=lightblue[']'/];
+    
+[for (comp : Composant | c.composants)]
+[for (port : Port | comp.ports)]
+    [comp.nom.replaceAll(' ', '_')/]_[port.nom/] ['['/]label="[port.nom/]\n[port.type/]"[']'/];
+    [comp.nom.replaceAll(' ', '_')/] -> [comp.nom.replaceAll(' ', '_')/]_[port.nom/] ['['/]style=dashed[']'/];
+[/for]
+[/for]
+
+    // Contraintes
+    node ['['/]shape=note, style=filled, fillcolor=lightyellow[']'/];
+    
+[for (comp : Composant | c.composants)]
+[if (comp.contraintes->size() > 0)]
+    [comp.nom.replaceAll(' ', '_')/]_contraintes ['['/]label="Contraintes:\n[for (ctr : Contrainte | comp.contraintes) separator('\n')][ctr.description/][/for]"[']'/];
+    [comp.nom.replaceAll(' ', '_')/] -> [comp.nom.replaceAll(' ', '_')/]_contraintes ['['/]style=dotted, color=red[']'/];
+[/if]
+[/for]
+}
+[/file]
+[/template]

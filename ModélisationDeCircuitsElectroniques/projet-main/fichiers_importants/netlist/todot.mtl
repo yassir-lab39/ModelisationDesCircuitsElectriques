@@ -1,0 +1,28 @@
+[comment encoding = UTF-8 /]
+[module todot('http://www.example.org/netlist', 'http://www.example.org/catalogue')]
+
+[template public netlistToDot(n : Netlist)]
+[comment @main/]
+[file (n.nom.concat('.dot'), false, 'UTF-8')]
+digraph [n.nom.replaceAll(' ', '_')/] {
+    rankdir=LR;
+    node ['['/]shape=box, style=filled, fillcolor=lightblue[']'/];
+    
+    // Composants (instances)
+[for (inst : InstanceComposant | n.instances)]
+    [inst.id/] ['['/]label="[inst.id/]\n[inst.composantRef.nom/]\n[inst.valeur/]"[']'/];
+[/for]
+
+    // Connexions
+[for (conn : Connexion | n.connexions)]
+[if (conn.portsConnectes->size() >= 2)]
+[let source : ReferencePort = conn.portsConnectes->first()]
+[for (target : ReferencePort | conn.portsConnectes->excluding(source))]
+    [source.instance.id/] -> [target.instance.id/] ['['/]label="[conn.nom/]\n[source.port.nom/]->[target.port.nom/]"[']'/];
+[/for]
+[/let]
+[/if]
+[/for]
+}
+[/file]
+[/template]

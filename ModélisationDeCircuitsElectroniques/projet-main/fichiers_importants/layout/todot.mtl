@@ -1,0 +1,59 @@
+[comment encoding = UTF-8 /]
+[module todot('http://www.example.org/layout', 'http://www.example.org/netlist', 'http://www.example.org/catalogue')]
+
+[template public layoutToDot(l : Layout)]
+[comment @main/]
+[file (l.nom.concat('.dot'), false, 'UTF-8')]
+digraph [l.nom.replaceAll(' ', '_')/] {
+    rankdir=TB;
+    compound=true;
+    
+[for (board : Board | l.boards)]
+    subgraph cluster_[board.nom.replaceAll(' ', '_')/] {
+        label="[board.nom/]\n[board.largeur/]x[board.hauteur/]mm";
+        style=filled;
+        fillcolor=lightgray;
+        
+[for (couche : Couche | board.couches)]
+        subgraph cluster_[board.nom.replaceAll(' ', '_')/]_[couche.nom.replaceAll(' ', '_')/] {
+            label="[couche.nom/] (Z:[couche.ordreZ/])";
+            style=filled;
+[if (couche.oclIsTypeOf(CoucheExterne))]
+[let ce : CoucheExterne = couche.oclAsType(CoucheExterne)]
+            fillcolor=lightyellow;
+            
+            // Composants
+            node ['['/]shape=box, style=filled, fillcolor=lightblue[']'/];
+[for (placement : PlacementComposant | ce.placements)]
+            [placement.instanceComposant.id/]_[couche.nom.replaceAll(' ', '_')/] ['['/]label="[placement.instanceComposant.id/]\n[placement.instanceComposant.composantRef.nom/]\n([placement.x/],[placement.y/])\nrot:[placement.rotation/]°"[']'/];
+[/for]
+[/let]
+[else]
+            fillcolor=lightcyan;
+            node ['['/]shape=plaintext[']'/];
+            internal_[couche.nom.replaceAll(' ', '_')/] ['['/]label="Couche interne"[']'/];
+[/if]
+        }
+[/for]
+    }
+[/for]
+
+    // Connexions
+    edge ['['/]color=red, penwidth=2[']'/];
+    
+[for (board : Board | l.boards)]
+[for (couche : Couche | board.couches)]
+[for (piste : Piste | couche.pistes)]
+[if (piste.portsConnectes->size() >= 2)]
+[let source : ReferencePort = piste.portsConnectes->first()]
+[for (target : ReferencePort | piste.portsConnectes->excluding(source))]
+    [source.instance.id/]_[couche.nom.replaceAll(' ', '_')/] -> [target.instance.id/]_[couche.nom.replaceAll(' ', '_')/] ['['/]label="[piste.largeur/]mm"[']'/];
+[/for]
+[/let]
+[/if]
+[/for]
+[/for]
+[/for]
+}
+[/file]
+[/template]

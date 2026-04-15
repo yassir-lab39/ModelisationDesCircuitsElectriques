@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<net:Netlist
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:net="http://www.example.org/netlist"
+    xmi:id="_RLC_NETLIST"
+    nom="Circuit_RLC_Serie">
+  <instances
+      xmi:id="GEN1"
+      id="GEN1"
+      valeur="12V"
+      remarque="Source de tension">
+    <composantRef
+        href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#C_GEN"/>
+  </instances>
+  <instances
+      xmi:id="R1"
+      id="R1"
+      valeur="100 Ohms"
+      remarque="Resistance de limitation">
+    <composantRef
+        href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#C_RES"/>
+  </instances>
+  <instances
+      xmi:id="L1"
+      id="L1"
+      valeur="10 mH"
+      remarque="Inductance">
+    <composantRef
+        href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#C_BOB"/>
+  </instances>
+  <instances
+      xmi:id="C1"
+      id="C1"
+      valeur="100 uF"
+      remarque="Capacite">
+    <composantRef
+        href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#C_COND"/>
+  </instances>
+  <connexions
+      xmi:id="CONN_NET1"
+      nom="Net1">
+    <portsConnectes
+        xmi:id="RP_GEN1_PLUS"
+        instance="GEN1">
+      <port
+          href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#P_GEN_PLUS"/>
+    </portsConnectes>
+    <portsConnectes
+        xmi:id="RP_R1_A"
+        instance="R1">
+      <port
+          href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#P_RES_A"/>
+    </portsConnectes>
+  </connexions>
+  <connexions
+      xmi:id="CONN_NET2"
+      nom="Net2">
+    <portsConnectes
+        xmi:id="RP_R1_B"
+        instance="R1">
+      <port
+          href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#P_RES_B"/>
+    </portsConnectes>
+    <portsConnectes
+        xmi:id="RP_L1_A"
+        instance="L1">
+      <port
+          href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#P_BOB_A"/>
+    </portsConnectes>
+  </connexions>
+  <connexions
+      xmi:id="CONN_NET3"
+      nom="Net3">
+    <portsConnectes
+        xmi:id="RP_L1_B"
+        instance="L1">
+      <port
+          href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#P_BOB_B"/>
+    </portsConnectes>
+    <portsConnectes
+        xmi:id="RP_C1_A"
+        instance="C1">
+      <port
+          href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#P_COND_A"/>
+    </portsConnectes>
+  </connexions>
+  <connexions
+      xmi:id="CONN_NET4"
+      nom="Net4">
+    <portsConnectes
+        xmi:id="RP_C1_B"
+        instance="C1">
+      <port
+          href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#P_COND_B"/>
+    </portsConnectes>
+    <portsConnectes
+        xmi:id="RP_GEN1_MOINS"
+        instance="GEN1">
+      <port
+          href="../../fr.n7.circuits.catalogue/model/catalogue1.xmi#P_GEN_MOINS"/>
+    </portsConnectes>
+  </connexions>
+  <commentaires
+      texte="Circuit RLC serie pour etude de resonance"
+      auteur="Etudiant"/>
+</net:Netlist>
